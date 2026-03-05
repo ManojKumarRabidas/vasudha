@@ -20,7 +20,7 @@ export default function Landing() {
             <div>
               <button
                 onClick={() => navigate('/auth/login')}
-                className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
+                className="px-6 py-2 border-2 border-primary bg-primary text-white rounded-lg hover:bg-primary-dark transition"
               >
                 Login
               </button>
