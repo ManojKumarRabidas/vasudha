@@ -7,14 +7,14 @@ import {
 
 // ─── Static mock transactions ────────────────────────────────────────────────
 const MOCK_TRANSACTIONS = [
-    { id: 'TXN001', type: 'credit', amount: 50000, date: '2024-02-20', donor: 'Rajesh Kumar', bank: 'HDFC Bank', accountNo: 'XXXX4521', ifsc: 'HDFC0001234', transactionRef: 'NEFT2024022001', mode: 'NEFT', note: 'Annual donation', category: 'Donation' },
-    { id: 'TXN002', type: 'debit', amount: 12000, date: '2024-02-18', donor: 'Field Programs Team', bank: 'SBI', accountNo: 'XXXX8823', ifsc: 'SBIN0001234', transactionRef: 'EXP2024021801', mode: 'UPI', note: 'Community health camp expenses', category: 'Field Programs' },
-    { id: 'TXN003', type: 'credit', amount: 25000, date: '2024-02-15', donor: 'Priya Sharma', bank: 'ICICI Bank', accountNo: 'XXXX3310', ifsc: 'ICIC0001234', transactionRef: 'IMPS2024021501', mode: 'IMPS', note: 'Monthly donation', category: 'Donation' },
-    { id: 'TXN004', type: 'debit', amount: 8500, date: '2024-02-12', donor: 'Admin Office', bank: 'Axis Bank', accountNo: 'XXXX9901', ifsc: 'UTIB0001234', transactionRef: 'EXP2024021201', mode: 'NEFT', note: 'Office supplies & stationery', category: 'Operations & Admin' },
-    { id: 'TXN005', type: 'credit', amount: 100000, date: '2024-02-10', donor: 'Tata Trusts', bank: 'Kotak Bank', accountNo: 'XXXX5522', ifsc: 'KKBK0001234', transactionRef: 'RTGS2024021001', mode: 'RTGS', note: 'Project grant Q1', category: 'Grant' },
-    { id: 'TXN006', type: 'debit', amount: 30000, date: '2024-02-08', donor: 'HR Dept', bank: 'SBI', accountNo: 'XXXX8823', ifsc: 'SBIN0001234', transactionRef: 'EXP2024020801', mode: 'NEFT', note: 'Staff salaries Feb 2024', category: 'Salaries & Stipends' },
-    { id: 'TXN007', type: 'credit', amount: 15000, date: '2024-02-05', donor: 'Anita Desai', bank: 'PNB', accountNo: 'XXXX7712', ifsc: 'PUNB0001234', transactionRef: 'UPI2024020501', mode: 'UPI', note: 'Event sponsorship', category: 'Donation' },
-    { id: 'TXN008', type: 'debit', amount: 20000, date: '2024-02-02', donor: 'Procurement', bank: 'HDFC Bank', accountNo: 'XXXX4521', ifsc: 'HDFC0001234', transactionRef: 'EXP2024020201', mode: 'Cheque', note: 'Medical equipment for camp', category: 'Equipment & Supplies' },
+    { id: 'TXN001', type: 'credit', amount: 50000, date: '2026-02-20', donor: 'Rajesh Kumar', bank: 'HDFC Bank', accountNo: 'XXXX4521', ifsc: 'HDFC0001234', transactionRef: 'NEFT2024022001', mode: 'NEFT', note: 'Annual donation', category: 'Donation' },
+    { id: 'TXN002', type: 'debit', amount: 12000, date: '2026-02-18', donor: 'Field Programs Team', bank: 'SBI', accountNo: 'XXXX8823', ifsc: 'SBIN0001234', transactionRef: 'EXP2024021801', mode: 'UPI', note: 'Community health camp expenses', category: 'Field Programs' },
+    { id: 'TXN003', type: 'credit', amount: 25000, date: '2026-02-15', donor: 'Priya Sharma', bank: 'ICICI Bank', accountNo: 'XXXX3310', ifsc: 'ICIC0001234', transactionRef: 'IMPS2024021501', mode: 'IMPS', note: 'Monthly donation', category: 'Donation' },
+    { id: 'TXN004', type: 'debit', amount: 8500, date: '2026-02-12', donor: 'Admin Office', bank: 'Axis Bank', accountNo: 'XXXX9901', ifsc: 'UTIB0001234', transactionRef: 'EXP2024021201', mode: 'NEFT', note: 'Office supplies & stationery', category: 'Operations & Admin' },
+    { id: 'TXN005', type: 'credit', amount: 100000, date: '2026-02-10', donor: 'Tata Trusts', bank: 'Kotak Bank', accountNo: 'XXXX5522', ifsc: 'KKBK0001234', transactionRef: 'RTGS2024021001', mode: 'RTGS', note: 'Project grant Q1', category: 'Grant' },
+    { id: 'TXN006', type: 'debit', amount: 30000, date: '2026-02-08', donor: 'HR Dept', bank: 'SBI', accountNo: 'XXXX8823', ifsc: 'SBIN0001234', transactionRef: 'EXP2024020801', mode: 'NEFT', note: 'Staff salaries Feb 2024', category: 'Salaries & Stipends' },
+    { id: 'TXN007', type: 'credit', amount: 15000, date: '2026-02-05', donor: 'Anita Desai', bank: 'PNB', accountNo: 'XXXX7712', ifsc: 'PUNB0001234', transactionRef: 'UPI2024020501', mode: 'UPI', note: 'Event sponsorship', category: 'Donation' },
+    { id: 'TXN008', type: 'debit', amount: 20000, date: '2026-02-02', donor: 'Procurement', bank: 'HDFC Bank', accountNo: 'XXXX4521', ifsc: 'HDFC0001234', transactionRef: 'EXP2024020201', mode: 'Cheque', note: 'Medical equipment for camp', category: 'Equipment & Supplies' },
 ]
 
 const EXPENSE_CATEGORIES = ['Operations & Admin', 'Field Programs', 'Salaries & Stipends', 'Equipment & Supplies']
