@@ -11,7 +11,7 @@ export default function AdminNav({ user, onLogout }) {
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <Heart className="w-5 h-5 text-white" />
           </div>
-          <h1 className="text-lg font-bold text-primary">VASUDHA Admin</h1>
+          <h1 className="text-lg font-bold text-primary">VASUDHAA Admin</h1>
         </div>
 
         {/* Desktop Menu */}
