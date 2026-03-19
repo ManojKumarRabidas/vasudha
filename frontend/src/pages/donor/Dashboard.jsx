@@ -3,6 +3,7 @@ import { useAuth } from '../../context/AuthContext'
 import DonorNav from '../../components/donor/Nav'
 import DonorStats from '../../components/donor/Stats'
 import ActivityFeed from '../../components/common/ActivityFeed'
+import NewDonationModal from '../../components/donor/NewDonationModal'
 import { mockData } from '../../data/data'
 import { LogOut, Plus } from 'lucide-react'
 
@@ -11,6 +12,7 @@ export default function DonorDashboard() {
   const [activeTab, setActiveTab] = useState('feed')
   const [ngoFollowing, setNgoFollowing] = useState([])
   const [donations, setDonations] = useState([])
+  const [showDonationModal, setShowDonationModal] = useState(false)
 
   useEffect(() => {
     // Load donor data
@@ -38,9 +40,15 @@ export default function DonorDashboard() {
             <h1 className="text-3xl font-bold text-gray-900">Welcome, {user.name}</h1>
             <p className="text-gray-600">Donor Dashboard</p>
           </div>
-          <button className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition">
+          {/* <button className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition">
             <Plus className="w-5 h-5" />
             New Donation
+          </button> */}
+          <button
+            onClick={() => setShowDonationModal(true)}
+            className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
+          >
+            <Plus className="w-5 h-5" /> New Donation
           </button>
         </div>
 
@@ -53,11 +61,10 @@ export default function DonorDashboard() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`py-3 px-4 font-medium border-b-2 transition ${
-                activeTab === tab
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-gray-600 hover:text-gray-900'
-              }`}
+              className={`py-3 px-4 font-medium border-b-2 transition ${activeTab === tab
+                ? 'border-primary text-primary'
+                : 'border-transparent text-gray-600 hover:text-gray-900'
+                }`}
             >
               {tab === 'feed' && 'NGO Feed'}
               {tab === 'my-donations' && 'My Donations'}
@@ -71,7 +78,7 @@ export default function DonorDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             {activeTab === 'feed' && <ActivityFeed ngos={mockData.ngos} />}
-            
+
             {activeTab === 'my-donations' && (
               <div className="space-y-4">
                 {donations.map((donation, i) => (
@@ -139,6 +146,12 @@ export default function DonorDashboard() {
           </div>
         </div>
       </main>
+
+      <NewDonationModal
+        isOpen={showDonationModal}
+        onClose={() => setShowDonationModal(false)}
+        donor={mockData.donors[0]}
+      />
     </div>
   )
 }

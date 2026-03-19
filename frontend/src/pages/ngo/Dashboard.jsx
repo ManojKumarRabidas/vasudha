@@ -152,7 +152,7 @@ export default function NGODashboard() {
                   <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                     <h3 className="font-bold text-gray-900 mb-4">Recent Donations</h3>
                     <div className="space-y-4">
-                      {[{ name: "Rajib Kumar", amount: 5000 }, { name: "Priya Sharma", amount: 3000 }, { name: "Amit Patel", amount: 2000 }].map((donor) => (
+                      {[{ name: "Rajesh Kumar", amount: 50000 }, { name: "Priya Sharma", amount: 25000 }, { name: "Tata Trusts", amount: 100000 }].map((donor) => (
                         <div key={donor.name} className="flex justify-between items-center pb-4 border-b border-gray-100 last:border-0">
                           <div>
                             <p className="font-medium text-gray-900">{donor.name}</p>
@@ -321,10 +321,15 @@ export default function NGODashboard() {
                     ))}
                   </div>
                 </section>
+                <span className="flex gap-4 justify-end">
 
-                <button className="w-full px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition font-semibold text-sm shadow-sm">
-                  Save Changes
-                </button>
+                  <button className="w-50 px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition font-semibold text-sm shadow-sm">
+                    Save Changes
+                  </button>
+                  <button className="w-50 px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-primary-dark transition font-semibold text-sm shadow-sm">
+                    Reset
+                  </button>
+                </span>
               </div>
             )}
           </div>
