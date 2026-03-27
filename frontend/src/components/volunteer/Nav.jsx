@@ -1,4 +1,4 @@
-import { Heart, Bell, Settings, LogOut, Menu, X } from 'lucide-react'
+import { Heart, Settings, LogOut, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
 export default function VolunteerNav({ user, onLogout }) {
@@ -22,10 +22,6 @@ export default function VolunteerNav({ user, onLogout }) {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <button className="relative p-2 text-gray-600 hover:text-primary transition">
-            <Bell className="w-5 h-5" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-          </button>
           <button className="p-2 text-gray-600 hover:text-primary transition">
             <Settings className="w-5 h-5" />
           </button>
@@ -56,6 +52,7 @@ export default function VolunteerNav({ user, onLogout }) {
             <a href="#" className="block text-gray-600 hover:text-primary">Find Work</a>
             <a href="#" className="block text-gray-600 hover:text-primary">My NGOs</a>
             <a href="#" className="block text-gray-600 hover:text-primary">Hours</a>
+
             <button onClick={onLogout} className="w-full text-left text-red-600 hover:text-red-700">
               Logout
             </button>
