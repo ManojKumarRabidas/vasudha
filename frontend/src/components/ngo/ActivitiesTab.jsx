@@ -164,8 +164,6 @@ function EditActivityModal({ activity, onClose, onSave }) {
         onClose()
     }
 
-    const typeCfg = POST_TYPE_CONFIG[form.type] || {}
-
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
@@ -179,7 +177,9 @@ function EditActivityModal({ activity, onClose, onSave }) {
                         </h2>
                         <p className="text-xs text-gray-400 mt-0.5">ID: {activity.id} · Posted {fmtTime(activity.postedAt)}</p>
                     </div>
-                    <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 text-gray-400"><X className="w-4 h-4" /></button>
+                    <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 text-gray-400">
+                        <X className="w-4 h-4" />
+                    </button>
                 </div>
 
                 <div className="px-6 py-5 grid grid-cols-2 gap-5">
@@ -193,8 +193,11 @@ function EditActivityModal({ activity, onClose, onSave }) {
                                 return (
                                     <button key={t.value} type="button"
                                         onClick={() => setForm(p => ({ ...p, type: t.value }))}
-                                        className={`px-3 py-2 rounded-lg border text-xs font-semibold transition text-center ${form.type === t.value ? `${cfg.color} border-current border-2` : 'bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100'
-                                            }`}>
+                                        className={`px-3 py-2 rounded-lg border text-xs font-semibold transition text-center ${
+                                            form.type === t.value
+                                                ? `${cfg.color} border-current border-2`
+                                                : 'bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100'
+                                        }`}>
                                         {t.label}
                                     </button>
                                 )
@@ -276,7 +279,9 @@ function EditActivityModal({ activity, onClose, onSave }) {
                             {(form.tags || []).map(tag => (
                                 <span key={tag} className="flex items-center gap-1 bg-primary/10 text-primary text-xs px-2.5 py-1 rounded-full font-medium">
                                     #{tag}
-                                    <button onClick={() => removeTag(tag)} className="hover:text-red-500"><X className="w-3 h-3" /></button>
+                                    <button onClick={() => removeTag(tag)} className="hover:text-red-500">
+                                        <X className="w-3 h-3" />
+                                    </button>
                                 </span>
                             ))}
                             <input value={tagInput} onChange={e => setTagInput(e.target.value)} onKeyDown={handleTagKeyDown}
@@ -314,8 +319,12 @@ function EditActivityModal({ activity, onClose, onSave }) {
 
                 {/* Footer */}
                 <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-100 bg-gray-50 rounded-b-2xl sticky bottom-0">
-                    <button onClick={onClose} className="px-5 py-2 text-sm border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-100 transition">Cancel</button>
-                    <button onClick={handleSave} className="px-6 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary-dark transition font-semibold">
+                    <button onClick={onClose}
+                        className="px-5 py-2 text-sm border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-100 transition">
+                        Cancel
+                    </button>
+                    <button onClick={handleSave}
+                        className="px-6 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary-dark transition font-semibold">
                         Save Changes
                     </button>
                 </div>
@@ -341,11 +350,9 @@ function ActivityCard({ activity, onEdit, onDelete }) {
                         <Image className="w-12 h-12" />
                     </div>
                 )}
-                {/* Type badge overlay */}
                 <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold shadow-sm ${typeCfg.color}`}>
                     {typeCfg.label}
                 </span>
-                {/* Media type indicator */}
                 {activity.mediaType === 'video' && (
                     <span className="absolute top-3 right-3 bg-black/60 text-white rounded-full px-2 py-1 text-xs flex items-center gap-1">
                         <Video className="w-3 h-3" /> Video
@@ -358,7 +365,6 @@ function ActivityCard({ activity, onEdit, onDelete }) {
                 <h3 className="font-bold text-gray-900 text-sm leading-snug">{activity.title}</h3>
                 <p className="text-sm text-gray-500 mt-1.5 line-clamp-2">{activity.caption}</p>
 
-                {/* Tags */}
                 {activity.tags?.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 mt-3">
                         {activity.tags.map(tag => (
@@ -369,13 +375,10 @@ function ActivityCard({ activity, onEdit, onDelete }) {
                     </div>
                 )}
 
-                {/* Meta row */}
                 <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                    <div className="flex items-center gap-3">
-                        <span className="flex items-center gap-1 text-xs text-gray-400">
-                            <Calendar className="w-3.5 h-3.5" /> {fmtDate(activity.date)}
-                        </span>
-                    </div>
+                    <span className="flex items-center gap-1 text-xs text-gray-400">
+                        <Calendar className="w-3.5 h-3.5" /> {fmtDate(activity.date)}
+                    </span>
                     <div className="flex items-center gap-3">
                         <span className="flex items-center gap-1 text-xs text-red-400 font-medium">
                             <Heart className="w-3.5 h-3.5 fill-red-300" /> {activity.likes}
@@ -386,7 +389,6 @@ function ActivityCard({ activity, onEdit, onDelete }) {
                     </div>
                 </div>
 
-                {/* Actions */}
                 <div className="flex gap-2 mt-3">
                     <button onClick={() => onEdit(activity)}
                         className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-blue-50 text-blue-600 rounded-lg text-xs font-semibold hover:bg-blue-100 transition">
@@ -425,14 +427,20 @@ export default function ActivitiesTab() {
             {/* Filter bar */}
             <div className="flex flex-wrap gap-2 items-center">
                 <button onClick={() => setTypeFilter('all')}
-                    className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition ${typeFilter === 'all' ? 'bg-gray-900 text-white border-gray-900' : 'border-gray-200 text-gray-500 hover:border-gray-400'
-                        }`}>
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition ${
+                        typeFilter === 'all'
+                            ? 'bg-gray-900 text-white border-gray-900'
+                            : 'border-gray-200 text-gray-500 hover:border-gray-400'
+                    }`}>
                     All ({activities.length})
                 </button>
                 {Object.entries(POST_TYPE_CONFIG).map(([key, cfg]) => (
                     <button key={key} onClick={() => setTypeFilter(key)}
-                        className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition ${typeFilter === key ? `${cfg.color} border-current` : 'border-gray-200 text-gray-500 hover:border-gray-400'
-                            }`}>
+                        className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition ${
+                            typeFilter === key
+                                ? `${cfg.color} border-current`
+                                : 'border-gray-200 text-gray-500 hover:border-gray-400'
+                        }`}>
                         {cfg.label} ({activities.filter(a => a.type === key).length})
                     </button>
                 ))}
@@ -470,3 +478,4 @@ export default function ActivitiesTab() {
         </div>
     )
 }
+ 

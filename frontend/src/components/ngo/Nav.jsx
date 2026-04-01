@@ -1,4 +1,5 @@
 import { Heart, Bell, Settings, LogOut, Menu, X, DollarSign, UserPlus, MessageSquare, Heart as HeartIcon, Check, CheckCheck, ChevronRight, User, Shield, BellRing, Globe, Palette, HelpCircle, Trash2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 
 // ─── Mock Notifications ───────────────────────────────────────────────────────
@@ -257,12 +258,12 @@ export default function NGONav({ user, onLogout }) {
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
 
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3 no-underline">
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <Heart className="w-5 h-5 text-white" />
           </div>
-          <h1 className="text-lg font-bold text-primary">VASUDHA</h1>
-        </div>
+          <h1 className="text-lg font-bold text-primary">VASUDHAA</h1>
+        </Link>
 
         {/* Desktop actions */}
         <div className="hidden md:flex items-center gap-1">
