@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import {
   Heart, Users, TrendingUp, Shield, ArrowRight, CheckCircle,
   MapPin, X, ChevronRight, Star
@@ -373,12 +373,12 @@ export default function Landing() {
       <header className="sticky top-0 bg-white border-b border-gray-200 shadow-sm z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2 no-underline">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center">
                 <img src="/images/vasudha-logo-2.png" alt="VASUDHA Logo" />
               </div>
               <h1 className="text-2xl font-bold text-primary">VASUDHA 1.0</h1>
-            </div>
+            </Link>
             <div>
               <button
                 onClick={() => navigate('/auth/login')}

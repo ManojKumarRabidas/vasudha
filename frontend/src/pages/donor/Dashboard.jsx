@@ -44,119 +44,120 @@ export default function DonorDashboard() {
             <Plus className="w-5 h-5" />
             New Donation
           </button> *//*}
-          <button
-            onClick={() => setShowDonationModal(true)}
-            className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
-          >
-            <Plus className="w-5 h-5" /> New Donation
-          </button>
-        </div>
+<button
+  onClick={() => setShowDonationModal(true)}
+  className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
+>
+  <Plus className="w-5 h-5" /> New Donation
+</button>
+</div>
 
-        {/* Stats *//*}
-        <DonorStats donations={donations} />
+{/* Stats *//*}
+<DonorStats donations={donations} />
 
-        {/* Tabs *//*}
-        <div className="flex gap-4 mb-8 border-b border-gray-200">
-          {['feed', 'my-donations', 'sdp', 'notifications'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`py-3 px-4 font-medium border-b-2 transition ${activeTab === tab
-                ? 'border-primary text-primary'
-                : 'border-transparent text-gray-600 hover:text-gray-900'
-                }`}
-            >
-              {tab === 'feed' && 'NGO Feed'}
-              {tab === 'my-donations' && 'My Donations'}
-              {tab === 'sdp' && 'SDP Plans'}
-              {tab === 'notifications' && 'Notifications'}
-            </button>
-          ))}
-        </div>
+{/* Tabs *//*}
+<div className="flex gap-4 mb-8 border-b border-gray-200">
+  {['feed', 'my-donations', 'sdp', 'notifications'].map((tab) => (
+    <button
+      key={tab}
+      onClick={() => setActiveTab(tab)}
+      className={`py-3 px-4 font-medium border-b-2 transition ${activeTab === tab
+        ? 'border-primary text-primary'
+        : 'border-transparent text-gray-600 hover:text-gray-900'
+        }`}
+    >
+      {tab === 'feed' && 'NGO Feed'}
+      {tab === 'my-donations' && 'My Donations'}
+      {tab === 'sdp' && 'SDP Plans'}
+      {tab === 'notifications' && 'Notifications'}
+    </button>
+  ))}
+</div>
 
-        {/* Content *//*}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            {activeTab === 'feed' && <ActivityFeed ngos={mockData.ngos} />}
+{/* Content *//*}
+<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <div className="lg:col-span-2">
+    {activeTab === 'feed' && <ActivityFeed ngos={mockData.ngos} />}
 
-            {activeTab === 'my-donations' && (
-              <div className="space-y-4">
-                {donations.map((donation, i) => (
-                  <div key={i} className="p-6 bg-white rounded-lg shadow-sm border border-gray-100">
-                    <div className="flex justify-between items-start mb-3">
-                      <div>
-                        <h3 className="font-bold text-gray-900">
-                          {mockData.ngos.find(n => n._id === donation.ngoId)?.name}
-                        </h3>
-                        <p className="text-sm text-gray-600">{new Date(donation.date).toLocaleDateString()}</p>
-                      </div>
-                      <span className="text-2xl font-bold text-primary">₹{donation.amount.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between items-center pt-3 border-t border-gray-100">
-                      <span className="text-sm text-gray-600 capitalize">{donation.type.replace('-', ' ')}</span>
-                      <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
-                        Completed
-                      </span>
-                    </div>
-                  </div>
-                ))}
+    {activeTab === 'my-donations' && (
+      <div className="space-y-4">
+        {donations.map((donation, i) => (
+          <div key={i} className="p-6 bg-white rounded-lg shadow-sm border border-gray-100">
+            <div className="flex justify-between items-start mb-3">
+              <div>
+                <h3 className="font-bold text-gray-900">
+                  {mockData.ngos.find(n => n._id === donation.ngoId)?.name}
+                </h3>
+                <p className="text-sm text-gray-600">{new Date(donation.date).toLocaleDateString()}</p>
               </div>
-            )}
-
-            {activeTab === 'sdp' && (
-              <div className="p-8 bg-white rounded-lg text-center border border-gray-200">
-                <p className="text-gray-600 mb-4">No active SDP plans yet</p>
-                <button className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition">
-                  Create SDP Plan
-                </button>
-              </div>
-            )}
-
-            {activeTab === 'notifications' && (
-              <div className="space-y-4">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="p-4 bg-white rounded-lg shadow-sm border border-blue-100 bg-blue-50">
-                    <p className="font-medium text-gray-900">NGO Activity Update</p>
-                    <p className="text-sm text-gray-600 mt-1">An NGO you follow has posted new activity</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Sidebar - NGOs You Follow *//*}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 sticky top-20">
-              <h3 className="font-bold text-gray-900 mb-4">NGOs You Follow</h3>
-              <div className="space-y-4">
-                {ngoFollowing.slice(0, 3).map((ngo, i) => (
-                  <div key={i} className="pb-4 border-b border-gray-100 last:border-0">
-                    <p className="font-medium text-gray-900 text-sm">{ngo?.name}</p>
-                    <p className="text-xs text-gray-600 mt-1">{ngo?.category}</p>
-                    <div className="flex items-center gap-1 mt-2">
-                      <span className="text-xs font-medium text-yellow-600">★ {ngo?.rating}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <button className="w-full mt-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition text-sm font-medium">
-                View All NGOs
-              </button>
+              <span className="text-2xl font-bold text-primary">₹{donation.amount.toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between items-center pt-3 border-t border-gray-100">
+              <span className="text-sm text-gray-600 capitalize">{donation.type.replace('-', ' ')}</span>
+              <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
+                Completed
+              </span>
             </div>
           </div>
-        </div>
-      </main>
+        ))}
+      </div>
+    )}
 
-      <NewDonationModal
-        isOpen={showDonationModal}
-        onClose={() => setShowDonationModal(false)}
-        donor={mockData.donors[0]}
-      />
+    {activeTab === 'sdp' && (
+      <div className="p-8 bg-white rounded-lg text-center border border-gray-200">
+        <p className="text-gray-600 mb-4">No active SDP plans yet</p>
+        <button className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition">
+          Create SDP Plan
+        </button>
+      </div>
+    )}
+
+    {activeTab === 'notifications' && (
+      <div className="space-y-4">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="p-4 bg-white rounded-lg shadow-sm border border-blue-100 bg-blue-50">
+            <p className="font-medium text-gray-900">NGO Activity Update</p>
+            <p className="text-sm text-gray-600 mt-1">An NGO you follow has posted new activity</p>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+
+  {/* Sidebar - NGOs You Follow *//*}
+<div className="lg:col-span-1">
+  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 sticky top-20">
+    <h3 className="font-bold text-gray-900 mb-4">NGOs You Follow</h3>
+    <div className="space-y-4">
+      {ngoFollowing.slice(0, 3).map((ngo, i) => (
+        <div key={i} className="pb-4 border-b border-gray-100 last:border-0">
+          <p className="font-medium text-gray-900 text-sm">{ngo?.name}</p>
+          <p className="text-xs text-gray-600 mt-1">{ngo?.category}</p>
+          <div className="flex items-center gap-1 mt-2">
+            <span className="text-xs font-medium text-yellow-600">★ {ngo?.rating}</span>
+          </div>
+        </div>
+      ))}
     </div>
-  )
+    <button className="w-full mt-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition text-sm font-medium">
+      View All NGOs
+    </button>
+  </div>
+</div>
+</div>
+</main>
+
+<NewDonationModal
+isOpen={showDonationModal}
+onClose={() => setShowDonationModal(false)}
+donor={mockData.donors[0]}
+/>
+</div>
+)
 }*/
 
 import { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import {
     X, Heart, IndianRupee, ChevronRight, Check,
     Smartphone, Globe, CreditCard, Wallet, Copy, CheckCircle2,
@@ -406,10 +407,10 @@ function LoginPage({ onLogin, onForgot }) {
                     {/* Google */}
                     <button className="google-btn" onClick={handleGoogle} style={{ marginBottom: 20 }}>
                         <svg width="18" height="18" viewBox="0 0 18 18">
-                            <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/>
-                            <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/>
-                            <path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/>
-                            <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/>
+                            <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
+                            <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" />
+                            <path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" />
+                            <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" />
                         </svg>
                         Continue with Google
                     </button>
@@ -657,7 +658,7 @@ function DonorDashboard({ onLogout }) {
             {/* Sidebar */}
             <div style={{ width: 240, background: 'white', borderRight: '1px solid var(--border)', display: 'flex', flexDirection: 'column', padding: '24px 16px', flexShrink: 0 }}>
                 {/* Logo */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 32, padding: '0 4px' }}>
+                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 32, padding: '0 4px', textDecoration: 'none' }}>
                     <div style={{ width: 36, height: 36, background: 'var(--primary)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                         <Heart size={18} color="white" />
                     </div>
@@ -665,7 +666,7 @@ function DonorDashboard({ onLogout }) {
                         <p className="font-display" style={{ fontSize: 17, fontWeight: 400, color: 'var(--text)', lineHeight: 1.2 }}>VASUDHA</p>
                         <p style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 600 }}>DONOR PORTAL</p>
                     </div>
-                </div>
+                </Link>
 
                 {/* Nav */}
                 <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>

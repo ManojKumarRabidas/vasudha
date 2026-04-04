@@ -1,4 +1,5 @@
-import { Heart, Bell, Settings, LogOut, Menu, X } from 'lucide-react'
+import { Heart, Settings, LogOut, Menu, X } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 export default function VolunteerNav({ user, onLogout }) {
@@ -7,12 +8,12 @@ export default function VolunteerNav({ user, onLogout }) {
   return (
     <nav className="sticky top-0 bg-white border-b border-gray-100 shadow-sm z-40">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3 no-underline">
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <Heart className="w-5 h-5 text-white" />
           </div>
           <h1 className="text-lg font-bold text-primary">VASUDHAA</h1>
-        </div>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
@@ -22,10 +23,6 @@ export default function VolunteerNav({ user, onLogout }) {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <button className="relative p-2 text-gray-600 hover:text-primary transition">
-            <Bell className="w-5 h-5" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-          </button>
           <button className="p-2 text-gray-600 hover:text-primary transition">
             <Settings className="w-5 h-5" />
           </button>
@@ -56,6 +53,7 @@ export default function VolunteerNav({ user, onLogout }) {
             <a href="#" className="block text-gray-600 hover:text-primary">Find Work</a>
             <a href="#" className="block text-gray-600 hover:text-primary">My NGOs</a>
             <a href="#" className="block text-gray-600 hover:text-primary">Hours</a>
+
             <button onClick={onLogout} className="w-full text-left text-red-600 hover:text-red-700">
               Logout
             </button>
