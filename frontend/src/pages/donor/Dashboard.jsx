@@ -1958,7 +1958,7 @@ function ModalReceipt({ form, donor, onClose }) {
 
 // ─── ROOT APP ─────────────────────────────────────────────────────────────────
 export default function DonorApp() {
-    const [screen, setScreen] = useState('login') // login | forgot | dashboard
+    const [screen, setScreen] = useState('dashboard') // login | forgot | dashboard
 
     useEffect(() => {
         // Inject styles
