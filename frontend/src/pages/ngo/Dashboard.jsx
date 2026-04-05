@@ -4,7 +4,7 @@ import {
   TrendingUp, Users, Heart, Plus, CheckCircle, Shield,
   MapPin, Calendar, Upload, FileText, Edit2, Trash2,
   ChevronDown, ChevronUp, Image as ImageIcon, X, Download,
-  IndianRupee, Eye, BadgeCheck, Clock, Target
+  IndianRupee, Eye, BadgeCheck, Clock, Target, LogOut
 } from 'lucide-react'
 
 // ─── Mock Data ────────────────────────────────────────────────────────────────
@@ -143,19 +143,16 @@ function CampaignModal({ isOpen, onClose, onSubmit, initial }) {
           <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition"><X className="w-5 h-5 text-gray-500" /></button>
         </div>
         <div className="p-6 space-y-5">
-          {/* Title */}
           <div>
             <label className="block text-xs font-semibold text-gray-500 mb-1">Campaign Title *</label>
             <input name="title" value={form.title} onChange={change} placeholder="e.g. Winter Blanket Drive 2025"
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 transition" />
           </div>
-          {/* Description */}
           <div>
             <label className="block text-xs font-semibold text-gray-500 mb-1">Description</label>
             <textarea name="description" value={form.description} onChange={change} rows={3} placeholder="What is this campaign about?"
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-300 transition" />
           </div>
-          {/* Goal + Location */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-semibold text-gray-500 mb-1">Goal Amount (₹) *</label>
@@ -168,7 +165,6 @@ function CampaignModal({ isOpen, onClose, onSubmit, initial }) {
                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 transition" />
             </div>
           </div>
-          {/* Dates */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-semibold text-gray-500 mb-1">Start Date</label>
@@ -181,7 +177,6 @@ function CampaignModal({ isOpen, onClose, onSubmit, initial }) {
                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 transition" />
             </div>
           </div>
-          {/* Images */}
           <div>
             <label className="block text-xs font-semibold text-gray-500 mb-2">Campaign Images</label>
             <div className="flex flex-wrap gap-2 mb-2">
@@ -199,7 +194,6 @@ function CampaignModal({ isOpen, onClose, onSubmit, initial }) {
               <Upload className="w-4 h-4" /> Upload Images
             </button>
           </div>
-          {/* PDF Proof */}
           <div>
             <label className="block text-xs font-semibold text-gray-500 mb-2">Proof / Authorization Document (PDF)</label>
             {form.proofDoc && (
@@ -233,7 +227,6 @@ function CampaignCard({ campaign, onEdit, onDelete, verified }) {
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-      {/* Header */}
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
@@ -251,8 +244,6 @@ function CampaignCard({ campaign, onEdit, onDelete, verified }) {
             <button onClick={onDelete} className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition"><Trash2 className="w-4 h-4" /></button>
           </div>
         </div>
-
-        {/* Meta */}
         <div className="flex flex-wrap gap-4 mt-3 text-xs text-gray-500">
           <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" />{campaign.location}</span>
           <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" />{campaign.startDate} → {campaign.endDate}</span>
@@ -263,8 +254,6 @@ function CampaignCard({ campaign, onEdit, onDelete, verified }) {
             </button>
           )}
         </div>
-
-        {/* Progress */}
         <div className="mt-4">
           <div className="flex justify-between text-sm mb-1.5">
             <span className="font-semibold text-gray-900">{fmtINR(campaign.raisedAmount)} raised</span>
@@ -279,15 +268,12 @@ function CampaignCard({ campaign, onEdit, onDelete, verified }) {
           </div>
         </div>
       </div>
-
-      {/* Donation Records Toggle */}
       <div className="border-t border-gray-100">
         <button onClick={() => setExpanded(p => !p)}
           className="w-full flex items-center justify-between px-5 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition">
           <span className="flex items-center gap-2"><IndianRupee className="w-4 h-4 text-blue-500" /> Donation Records ({campaign.donations.length})</span>
           {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
-
         {expanded && (
           <div className="px-5 pb-4 space-y-2">
             {campaign.donations.length === 0 ? (
@@ -323,18 +309,9 @@ function CampaignsTab({ verified }) {
   const [showModal, setShowModal] = useState(false)
   const [editTarget, setEditTarget] = useState(null)
 
-  const handleCreate = (data) => {
-    setCampaigns(p => [data, ...p])
-  }
-
-  const handleEdit = (data) => {
-    setCampaigns(p => p.map(c => c.id === data.id ? data : c))
-    setEditTarget(null)
-  }
-
-  const handleDelete = (id) => {
-    if (window.confirm('Delete this campaign?')) setCampaigns(p => p.filter(c => c.id !== id))
-  }
+  const handleCreate = (data) => setCampaigns(p => [data, ...p])
+  const handleEdit = (data) => { setCampaigns(p => p.map(c => c.id === data.id ? data : c)); setEditTarget(null) }
+  const handleDelete = (id) => { if (window.confirm('Delete this campaign?')) setCampaigns(p => p.filter(c => c.id !== id)) }
 
   return (
     <div className="space-y-5">
@@ -348,7 +325,6 @@ function CampaignsTab({ verified }) {
           <Plus className="w-4 h-4" /> Create Campaign
         </button>
       </div>
-
       {campaigns.length === 0 ? (
         <div className="bg-white rounded-xl border border-dashed border-gray-300 p-12 text-center">
           <Target className="w-10 h-10 text-gray-300 mx-auto mb-3" />
@@ -359,21 +335,17 @@ function CampaignsTab({ verified }) {
         <div className="space-y-4">
           {campaigns.map(c => (
             <CampaignCard key={c.id} campaign={c} verified={verified}
-              onEdit={() => setEditTarget(c)}
-              onDelete={() => handleDelete(c.id)} />
+              onEdit={() => setEditTarget(c)} onDelete={() => handleDelete(c.id)} />
           ))}
         </div>
       )}
-
       <CampaignModal isOpen={showModal} onClose={() => setShowModal(false)} onSubmit={handleCreate} />
-      {editTarget && (
-        <CampaignModal isOpen={true} onClose={() => setEditTarget(null)} onSubmit={handleEdit} initial={editTarget} />
-      )}
+      {editTarget && <CampaignModal isOpen={true} onClose={() => setEditTarget(null)} onSubmit={handleEdit} initial={editTarget} />}
     </div>
   )
 }
 
-// ─── Transactions Tab (inline, same style) ────────────────────────────────────
+// ─── Transactions Tab ─────────────────────────────────────────────────────────
 function TransactionsTab() {
   const [donors] = useState(initialDonors)
   return (
@@ -466,6 +438,11 @@ export default function NGODashboard() {
     setProfileForm(p => ({ ...p, [name]: value }))
   }
 
+  // ── Logout handler ──
+  const handleLogout = () => {
+    window.location.href = '/auth/login'
+  }
+
   const stats = [
     { label: 'Total Donations', value: `₹${(ngo.totalDonations / 100000).toFixed(1)}L`, icon: Heart, bg: 'bg-red-50', iconColor: 'text-red-400', textColor: 'text-red-600' },
     { label: 'Active Donors', value: '320', icon: Users, bg: 'bg-blue-50', iconColor: 'text-blue-400', textColor: 'text-blue-600' },
@@ -477,7 +454,8 @@ export default function NGODashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Nav */}
+
+      {/* ── Nav with Logout button ── */}
       <nav className="bg-white border-b border-gray-200 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 no-underline">
@@ -486,9 +464,21 @@ export default function NGODashboard() {
             </div>
             <span className="font-bold text-gray-900 text-lg">VASUDHA 1.0</span>
           </Link>
+
+          {/* Right side — verified badge + avatar + LOGOUT */}
           <div className="flex items-center gap-3">
             {ngo.verified && <VerifiedBadge size="sm" />}
-            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-sm">A</div>
+            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-sm">
+              A
+            </div>
+            {/* ── LOGOUT BUTTON ── */}
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-1.5 px-4 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition text-sm font-medium"
+            >
+              <LogOut className="w-4 h-4" />
+              Sign Out
+            </button>
           </div>
         </div>
       </nav>
@@ -538,7 +528,6 @@ export default function NGODashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-3">
 
-            {/* OVERVIEW */}
             {activeTab === 'overview' && (
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="space-y-6 lg:col-span-2">
@@ -568,7 +557,6 @@ export default function NGODashboard() {
                     </div>
                   </div>
                 </div>
-
                 <div className="lg:col-span-1">
                   <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sticky top-20">
                     <h3 className="font-bold text-gray-900 mb-4">Quick Stats</h3>
@@ -601,12 +589,11 @@ export default function NGODashboard() {
               </div>
             )}
 
-            {activeTab === 'campaigns' && <CampaignsTab verified={ngo.verified} />}
+            {activeTab === 'campaigns'    && <CampaignsTab verified={ngo.verified} />}
             {activeTab === 'transactions' && <TransactionsTab />}
-            {activeTab === 'volunteers' && <VolunteersTab />}
-            {activeTab === 'activities' && <ActivitiesTab />}
+            {activeTab === 'volunteers'   && <VolunteersTab />}
+            {activeTab === 'activities'   && <ActivitiesTab />}
 
-            {/* PROFILE */}
             {activeTab === 'profile' && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-8">
                 <div className="flex items-center justify-between">
