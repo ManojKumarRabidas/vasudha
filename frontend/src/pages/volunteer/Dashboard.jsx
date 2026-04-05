@@ -1,22 +1,53 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import VolunteerNav from '../../components/volunteer/Nav'
 import { mockData } from '../../data/data'
-import { Clock, Heart, MapPin, Briefcase, Plus } from 'lucide-react'
+import { Clock, Heart, MapPin, Briefcase, Plus, LogOut } from 'lucide-react'
 
 export default function VolunteerDashboard() {
   const { user, logout } = useAuth()
+  const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('overview')
   const volunteer = mockData.volunteers[0]
 
   const handleLogout = () => {
     logout()
-    window.location.href = '/'
+    navigate('/auth/login')
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <VolunteerNav user={user} onLogout={handleLogout} />
+
+      {/* ── Nav with Logout ── */}
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-30">
+        <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+              <Heart className="w-4 h-4 text-white" />
+            </div>
+            <span className="font-bold text-gray-900 text-lg">VASUDHA 1.0</span>
+          </div>
+
+          {/* Right side */}
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
+                {volunteer?.name?.[0] || 'V'}
+              </div>
+              <span className="text-sm font-medium text-gray-700">{volunteer?.name}</span>
+            </div>
+            {/* ── LOGOUT BUTTON ── */}
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-1.5 px-4 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition text-sm font-medium"
+            >
+              <LogOut className="w-4 h-4" />
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </nav>
 
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
@@ -62,11 +93,11 @@ export default function VolunteerDashboard() {
                   : 'border-transparent text-gray-600 hover:text-gray-900'
               }`}
             >
-              {tab === 'overview' && 'Overview'}
-              {tab === 'opportunities' && 'Opportunities'}
-              {tab === 'my-ngos' && 'My NGOs'}
-              {tab === 'hours' && 'Hours Log'}
-              {tab === 'profile' && 'Profile'}
+              {tab === 'overview'       && 'Overview'}
+              {tab === 'opportunities'  && 'Opportunities'}
+              {tab === 'my-ngos'        && 'My NGOs'}
+              {tab === 'hours'          && 'Hours Log'}
+              {tab === 'profile'        && 'Profile'}
             </button>
           ))}
         </div>
@@ -74,9 +105,9 @@ export default function VolunteerDashboard() {
         {/* Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
+
             {activeTab === 'overview' && (
               <div className="space-y-6">
-                {/* Help Requests */}
                 <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                   <h3 className="font-bold text-gray-900 mb-4">Active Help Requests</h3>
                   {mockData.helpRequests.map((request, i) => (
@@ -183,6 +214,13 @@ export default function VolunteerDashboard() {
                   <button className="w-full px-4 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition font-medium mt-6">
                     Save Changes
                   </button>
+                  {/* ── Sign out from profile tab too ── */}
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-red-200 text-red-600 rounded-lg hover:bg-red-50 transition font-medium"
+                  >
+                    <LogOut className="w-4 h-4" /> Sign Out
+                  </button>
                 </div>
               </div>
             )}
@@ -209,6 +247,13 @@ export default function VolunteerDashboard() {
                 </div>
                 <button className="w-full mt-4 px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition font-medium">
                   Browse All NGOs
+                </button>
+                {/* ── Sign out in sidebar ── */}
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-red-200 text-red-600 rounded-lg hover:bg-red-50 transition font-medium text-sm"
+                >
+                  <LogOut className="w-4 h-4" /> Sign Out
                 </button>
               </div>
             </div>
